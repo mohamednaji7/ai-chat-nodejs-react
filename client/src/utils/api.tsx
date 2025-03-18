@@ -1,14 +1,22 @@
+import supabase from './supabase';
+
+
 export const API_BASE = import.meta.env.VITE_API_URL || 
   (window.location.hostname === 'localhost' 
     ? 'http://localhost:3000' 
     : `http://${window.location.hostname}:3000`);
 
 export const updateMessageReaction = async (messageId: string, reaction: string) => {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    throw new Error('No active session');
+  }
   return fetch(`${API_BASE}/api/v1/reaction`, {
     method: 'POST',
     credentials: 'include',
     headers: {
-      'Content-Type': 'application/json'
+      'Authorization': `Bearer ${session.access_token}`, // Add the JWT token
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       messageId,
@@ -16,31 +24,43 @@ export const updateMessageReaction = async (messageId: string, reaction: string)
     })
   })
 }
-export const generateChatTitle = async (newPrompt: string, chatId: string ) : Promise<string> =>{
+
+export const generateChatTitle = async ( chatId: string ) : Promise<string> =>{
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    throw new Error('No active session');
+  }
   const response = await fetch(`${API_BASE}/api/v1/generate-title`, {
     method: 'POST',
     credentials: 'include',
     headers: {
-      'Content-Type': 'application/json'
+      'Authorization': `Bearer ${session.access_token}`, // Add the JWT token
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      newPrompt,
       chatId
     })
   })
   const data = await response.json();
   return data.newTitle
 }
+
 export const fetchStreamResponse = async (
   url: string, 
   body: any, 
   onData: (streamingResponse: any) => void,
   onDone: (finalData: any) => void
 ) => {
+
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    throw new Error('No active session');
+  }
   const response = await fetch(url, {
     method: 'POST',
     credentials: 'include',
     headers: {
+      'Authorization': `Bearer ${session.access_token}`, // Add the JWT token
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(body),

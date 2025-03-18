@@ -45,6 +45,7 @@ export const useChatStream = (chatId: string, isStreaming: boolean, setIsStreami
       try {
         setIsStreaming(true);
         console.log('Starting stream request for prompt:', newPrompt);
+        
         const url = `${import.meta.env.VITE_API_URL}/api/v1/prompt-stream`;
         console.log('Streaming endpoint URL:', url);
         let resData = { 
@@ -131,7 +132,7 @@ export const useChatStream = (chatId: string, isStreaming: boolean, setIsStreami
 
       // if previousMessagesLength === 0, 4, 8, 16, or 32 then do something
       if(previousMessagesLength % 4 === 0){
-        const newTitle = await generateChatTitle(data.prompt, chatId);
+        const newTitle = await generateChatTitle( chatId);
 
   
         // Update the title directly with the available queryClient

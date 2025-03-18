@@ -3,17 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { API_BASE } from '../../utils/api';
 import ChatInput from '../../components/ChatInput/ChatInput';
+import supabase from '../../utils/supabase';
 
 const NewChat = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const handleSubmit = async (message: string) => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      throw new Error('No active session');
+    }
     const response = await fetch(`${API_BASE}/api/v1/chat`, {
       method: 'POST',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${session.access_token}`, // Add the JWT token
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         title: message.substring(0, 37)

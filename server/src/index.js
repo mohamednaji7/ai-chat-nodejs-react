@@ -19,8 +19,7 @@ import promptStreamRouter from './routes/promptStreamGeminiRouter.js';
 
 
 // Import middleware
-
-import { clerkMiddleware, requireAuth } from '@clerk/express'
+import  authenticateToken from './middleware/authenticateToken.js';
 
 // ********************************************************************************
 
@@ -54,7 +53,6 @@ app.use(
 );
 
 app.use(express.json());
-app.use(clerkMiddleware());
 
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -70,12 +68,12 @@ app.get('/api/v1/alive', (req, res) => {
 });    
 
 // Protected route example
-app.get('/api/v1/alive-protected', requireAuth(), (req, res) => {
+app.get('/api/v1/alive-protected', authenticateToken, (req, res) => {
     res.send(`This is a protected endpoint.`);
   });
 // Protected route example
-app.get('/api/v1/alive-protected-user', requireAuth(), (req, res) => {
-    res.send(`Hello ${req.user.email}! This is a protected endpoint.`);
+app.get('/api/v1/alive-protected-user', authenticateToken,  (req, res) => {
+    res.send(`Hello ${req.user.user_metadata.email}! This is a protected endpoint.`);
   });
 
 
@@ -83,13 +81,13 @@ app.get('/api/v1/alive-protected-user', requireAuth(), (req, res) => {
 // Protected routes - add requireAuth middleware
 
 // Protected routes 
-app.use('/api/v1', requireAuth(), chatRouter);
-app.use('/api/v1', requireAuth(), chatsRouter);
-app.use('/api/v1', requireAuth(), historyRouter);
-app.use('/api/v1', requireAuth(), promptRouter);
-app.use('/api/v1', requireAuth(), promptStreamRouter);
-app.use('/api/v1', requireAuth(), generateTitleRouter);
-app.use('/api/v1', requireAuth(), reactionRouter);
+app.use('/api/v1',authenticateToken, chatRouter);
+app.use('/api/v1',authenticateToken, chatsRouter);
+app.use('/api/v1',authenticateToken, historyRouter);
+app.use('/api/v1',authenticateToken, promptRouter);
+app.use('/api/v1',authenticateToken, promptStreamRouter);
+app.use('/api/v1',authenticateToken, generateTitleRouter);
+app.use('/api/v1',authenticateToken, reactionRouter);
 
 
 

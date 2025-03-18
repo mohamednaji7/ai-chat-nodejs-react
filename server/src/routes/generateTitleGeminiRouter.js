@@ -21,12 +21,9 @@ router.post('/generate-title', async (req, res)=>{
     console.log(`[ /prompt-stream ] [Gemini]`)
     console.log({body: req.body})
 
-    // Extract user authentication info from Clerk middleware
-    const { sessionClaims } = req.auth;    
-    // Get the email from session claims
 
     try{
-        const {chatId, prompt} = req.body
+        const {chatId} = req.body
 
 
         // Get chat history
@@ -37,7 +34,7 @@ router.post('/generate-title', async (req, res)=>{
 
         
         const result = await model.generateContent(
-            geTtitlePrompt(sessionClaims.fullname, sessionClaims.email, conversation)
+            geTtitlePrompt(req.user.user_metadata.fullname|| " ", req.user.user_metadata.email, conversation)
         );
         console.log(result.response.text())
         const newTitle =  result.response.text().trim()

@@ -1,13 +1,16 @@
+import './dashboardLayout.css'
 import { Outlet } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query';
-import { useLocation , useNavigate} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useAuth } from '@clerk/clerk-react'
 
-import './dashboardLayout.css'
+import { useNavigate } from 'react-router-dom';
 import {  useState} from 'react';
 import DashboardSidebar from '../../components/dashboardSidebar/DashboardSidebar';
 import SidebarToggleButton from '../../components/sidebarToggleButton/SidebarToggleButton';
+
+import supabase from '../../utils/supabase';
+
 
 interface Chat {
   _id: string;
@@ -17,12 +20,22 @@ interface Chat {
 
 const DashboardLayout = () => {
 
-  const navigate = useNavigate();
-  const {userId, isLoaded} = useAuth();
   
   const path = useLocation().pathname;
   const chatId = path.split('/').pop();
+  const navigate = useNavigate();
 
+    // Check auth status on component mount
+    useEffect(() => {
+      const checkUser = async () => {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) {
+          navigate('/'); // Redirect if already signed in
+        }
+      };
+      checkUser();
+
+    }, [navigate]);
   
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
@@ -37,12 +50,6 @@ const DashboardLayout = () => {
 
 
   
-  // const userChats = useQueryClient().getQueryData<Chat[]>(['userChats']);
-  // Use useQuery to properly subscribe to changes in the userChats data
-  // const { data: userChats } = useQuery<Chat[]>({
-  //   queryKey: ['userChats'],
-  //   queryFn: () => queryClient.getQueryData(['userChats']) || [],
-  //   enabled: !!chatId
   // });
   const { data: userChats } = useQuery<Chat[]>({
     queryKey: ['userChats'],
@@ -52,17 +59,7 @@ const DashboardLayout = () => {
     gcTime: Infinity 
   });
 
-
-  useEffect(()=>{
-    if(isLoaded && !userId){
-      navigate('/')
-    }
-  }, [isLoaded, userId, navigate])
   
-  if(!isLoaded){
-    return 'Loading...'
-  }
-
 
   
   const chatTitle = userChats?.find((chat) => chat._id === chatId)?.title || 'New Chat';

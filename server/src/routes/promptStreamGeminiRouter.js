@@ -26,7 +26,6 @@ router.post('/prompt-stream', async (req, res)=>{
     console.log(`[ /prompt-stream ] [Gemini]`)
     console.log({body: req.body})
     // Extract user authentication info from Clerk middleware
-    const { sessionClaims } = req.auth;    
     // Get the email from session claims
     try{
         const {chatId, prompt} = req.body
@@ -39,10 +38,10 @@ router.post('/prompt-stream', async (req, res)=>{
 
         console.log('systemInstruction')
         const systemInstructionText = SystemInstruction(
-            sessionClaims.full_name,
-             sessionClaims.email
+            req.user.user_metadata.full_name || " ",
+            req.user.user_metadata.email
             ) 
-        
+        console.log({systemInstructionText})
 
 
         // const promptEmbds = await embed(prompt)

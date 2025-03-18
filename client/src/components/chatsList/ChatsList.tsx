@@ -3,6 +3,7 @@ import './chatsList.css'
 import {useQuery} from '@tanstack/react-query'
 import { API_BASE } from '../../utils/api';
 import { isMobile } from '../../utils/isMobile';
+import supabase from '../../utils/supabase';
 
 interface ChatsListProps {
   setIsSidebarOpen: (isOpen: boolean) => void;
@@ -20,12 +21,20 @@ const ChatsList: React.FC<ChatsListProps> = ({ setIsSidebarOpen }) => {
   const { error, data, isFetching } = useQuery<{ _id: string, title: string }[]>({
     queryKey: ['userChats'],
     queryFn: async () => {
+      // Get the current session from Supabase
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        throw new Error('No active session');
+      }
       const response = await fetch(
         endpoint,
         {
           method: 'GET',
           credentials: 'include',
-
+          headers: {
+            'Authorization': `Bearer ${session.access_token}`, // Add the JWT token
+            'Content-Type': 'application/json',
+          },
         }
       )
       

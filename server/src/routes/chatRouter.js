@@ -9,14 +9,11 @@ router.post('/chat',  async (req, res)=>{
     try{
         const {title} = req.body
 
-        // Extract user authentication info from Clerk middleware
-        const { sessionClaims } = req.auth;    
-        // Get the email from session claims
 
 
         // Create a new chat
         console.log({'[ChatService]' : '[createChat]'})
-        const newChat = await ChatService.createChat(sessionClaims.email, title, "default-model");
+        const newChat = await ChatService.createChat(req.user.user_metadata.sub, title, "default-model");
         console.log('Chat Created:', newChat);
         res.status(200).send(newChat)
 
