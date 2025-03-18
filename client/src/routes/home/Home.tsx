@@ -22,7 +22,6 @@ const Home = () => {
 
     return () => subscription.unsubscribe();
   }, []);
-
   if (session) {
     return <Navigate to="/start-chat/" replace />;
   }
@@ -50,10 +49,13 @@ const Home = () => {
             },
           }}
           providers={['google']}
+          redirectTo={window.location.origin}
+
         />
+
       </div>
     </div>
   );
-};
+};  
 
 export default Home;

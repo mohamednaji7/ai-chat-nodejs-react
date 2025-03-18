@@ -13,7 +13,7 @@ router.post('/chat',  async (req, res)=>{
 
         // Create a new chat
         console.log({'[ChatService]' : '[createChat]'})
-        const newChat = await ChatService.createChat(req.user.user_metadata.sub, title, "default-model");
+        const newChat = await ChatService.createChat(req.user.sub, title, "default-model");
         console.log('Chat Created:', newChat);
         res.status(200).send(newChat)
 

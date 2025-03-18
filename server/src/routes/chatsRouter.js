@@ -11,10 +11,10 @@ router.get('/chats',  async (req, res)=>{
 
     
         // Get the user chats
-        const userChats = await ProfileService.getUserChats(req.user.user_metadata.sub);
-        console.log('User Chats:');
+        // console.log(req.user)
+        const userChats = await ProfileService.getUserChats(req.user.sub);
+        console.log('User Chats: ', userChats.length);
         // console.log(userChats);
-        console.log(userChats.length);
 
         
         res.status(200).send(userChats)
