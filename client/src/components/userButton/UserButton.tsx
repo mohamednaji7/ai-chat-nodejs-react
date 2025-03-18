@@ -1,24 +1,13 @@
 import { useState, useRef,  useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import './userButton.css'
-import { UserButton } from '@clerk/clerk-react';
-
-// do the logout action using clerk
-import { useClerk } from "@clerk/clerk-react";
-
-import { useUser } from '@clerk/clerk-react'
-
-
-const UserButtonElemnt = () => {
+import supabase from '../../utils/supabase'
+const UserButton = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
   const navigate = useNavigate()
-  const { user } = useUser();
-  const { signOut } = useClerk();
-
-  const username = user?.firstName?.split(' ')[0] + ' ' + user?.lastName?.split(' ').at(-1)   || 'Guest';
-
-  // solve using index
+  const username = localStorage.getItem('username') || 'Guest'
+  const userInitial = username.charAt(0).toUpperCase()
   const menuRef = useRef<HTMLDivElement>(null)
   const confirmationRef = useRef<HTMLDivElement>(null) // Add this ref
 
@@ -26,13 +15,18 @@ const UserButtonElemnt = () => {
     setShowConfirmation(true)
   }
 
-  const confirmLogout = () => {
-    localStorage.clear()
-    // do the logout action using clerk
-    signOut()
 
-    navigate('/sign-in')
+  const confirmLogout = async () => {
+    // localStorage.clear()
+    const { error } = await supabase.auth.signOut() // Supabase logout
+    if (error) {
+      handleCancel()
+    }
+    else{
+      navigate('/')
+    }
   }
+
   const handleCancel = () => {
     setShowConfirmation(false)
     setIsOpen(false)
@@ -56,7 +50,9 @@ const UserButtonElemnt = () => {
   return (
     <div className='userButtonContainer' ref={menuRef}>
       <div className='userButton' onClick={() => setIsOpen(!isOpen)}>
-        <UserButton />
+        <div className="avatar">
+          {userInitial}
+        </div>
         <div className="userInfo">
           <span className="username">{username}</span>
           <span className="role">Member</span>
@@ -86,4 +82,4 @@ const UserButtonElemnt = () => {
   )
 }
 
-export default UserButtonElemnt
+export default UserButton 
