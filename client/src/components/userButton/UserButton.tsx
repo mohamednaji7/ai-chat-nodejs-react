@@ -16,15 +16,16 @@ const UserButton = () => {
   }
 
 
-  const confirmLogout = async () => {
-    // localStorage.clear()
-    const { error } = await supabase.auth.signOut() // Supabase logout
-    if (error) {
-      handleCancel()
-    }
-    else{
+  const confirmLogout =  () => {
+    try{
+      supabase.auth.signOut() // Supabase logout
       navigate('/')
     }
+    catch (error) {
+      alert(`Error logging out ${error}`)
+      localStorage.clear()
+    }
+
   }
 
   const handleCancel = () => {
