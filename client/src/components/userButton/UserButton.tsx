@@ -1,13 +1,24 @@
 import { useState, useRef,  useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import './userButton.css'
+import { UserButton } from '@clerk/clerk-react';
 
-const UserButton = () => {
+// do the logout action using clerk
+import { useClerk } from "@clerk/clerk-react";
+
+import { useUser } from '@clerk/clerk-react'
+
+
+const UserButtonElemnt = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
   const navigate = useNavigate()
-  const username = localStorage.getItem('username') || 'Guest'
-  const userInitial = username.charAt(0).toUpperCase()
+  const { user } = useUser();
+  const { signOut } = useClerk();
+
+  const username = user?.firstName?.split(' ')[0] + ' ' + user?.lastName?.split(' ').at(-1)   || 'Guest';
+
+  // solve using index
   const menuRef = useRef<HTMLDivElement>(null)
   const confirmationRef = useRef<HTMLDivElement>(null) // Add this ref
 
@@ -17,9 +28,10 @@ const UserButton = () => {
 
   const confirmLogout = () => {
     localStorage.clear()
-    document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-    document.cookie = 'isAuth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-    navigate('/')
+    // do the logout action using clerk
+    signOut()
+
+    navigate('/sign-in')
   }
   const handleCancel = () => {
     setShowConfirmation(false)
@@ -44,9 +56,7 @@ const UserButton = () => {
   return (
     <div className='userButtonContainer' ref={menuRef}>
       <div className='userButton' onClick={() => setIsOpen(!isOpen)}>
-        <div className="avatar">
-          {userInitial}
-        </div>
+        <UserButton />
         <div className="userInfo">
           <span className="username">{username}</span>
           <span className="role">Member</span>
@@ -76,4 +86,4 @@ const UserButton = () => {
   )
 }
 
-export default UserButton
+export default UserButtonElemnt
