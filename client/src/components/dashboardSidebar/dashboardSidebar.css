@@ -1,0 +1,48 @@
+.dashboardSidebar{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2rem 0.75rem 1rem;
+    background-color: #232322;
+    /* #f5f4ef for the text */
+    
+    .sidebar-header {
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: flex-end;
+        padding: 0 0.5rem;
+    }
+
+    .btn-new-chat{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #44433c;
+        /* 
+        e: 44433c
+        5c5a4f:  */
+        color: rgb(209, 202, 202);
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        &:hover{
+            /* color: rgb(51, 68, 194); */
+            /* background-color: #e2dfeb; */
+            background-color: #5c5a4f;
+        }
+    }
+
+    hr{
+        border: none;
+        height: 2px;
+        background-color: #ddd;
+        opacity: 0.1;
+        border-radius: 5px;
+        margin: 20px 0px;
+    }
+    
+}

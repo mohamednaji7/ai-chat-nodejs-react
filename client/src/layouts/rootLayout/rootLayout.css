@@ -1,0 +1,23 @@
+.rootLayout {
+  /* padding: 16px 64px 0px ; */
+  /* padding-top: 16px; */
+  /* padding-left: .75rem; */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* background-color: #12101b; */
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+  }
+
+  main {
+    flex: 1;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,71 @@
+.home {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    min-height: 100vh;
+    padding: 0 2rem;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1rem;
+        justify-content: flex-start;
+        padding-top: 4rem;
+    }
+
+    .left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        text-align: center;
+  
+        h1 {
+            font-size: 128px;
+            background: linear-gradient(to right, #217bfe, #e55571);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+
+            @media (max-width: 768px) {
+                font-size: 48px;
+            }
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #666;
+            max-width: 400px;
+
+            @media (max-width: 768px) {
+                font-size: 18px;
+                max-width: 300px;
+            }
+        }
+        .signLinks {
+            display: flex;
+            margin: 0px;
+  
+          a {
+            margin: 0px 10px ;
+  
+            padding: 15px 25px;
+            background-color: #217bfe;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-top: 20px; 
+            &:last-child{
+              background-color: #10284d;
+              color: rgb(5, 145, 209);
+            }
+            &:hover {
+              background-color: white;
+              color: #217bfe;
+            }
+          }
+        }
+    }
+}

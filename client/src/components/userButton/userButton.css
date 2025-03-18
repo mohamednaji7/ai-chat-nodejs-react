@@ -1,0 +1,151 @@
+.userButtonContainer {
+    position: relative;
+    z-index: 2;
+     /* Add z-index to ensure proper stacking context */
+  }
+  
+.userButton {
+  position: relative;
+  z-index: 2; /* Add z-index to ensure proper stacking context */
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #44433c;
+        /* 
+        e: 44433c
+        5c5a4f:  */
+  /* hsl(48deg 100% 29.53% / 80%) ; */
+
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.userButton:hover {
+  background-color: #5c5a4f;
+}
+
+.userButton .avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #58574f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #e2dfeb;
+}
+
+.userButton .userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userButton .username {
+  font-weight: 600;
+  color: #e2dfeb;
+}
+
+.userButton .role {
+  font-size: 0.8rem;
+  color: #8f8b9b;
+}
+
+/* Popup Menu Styles */
+.popup-menu {
+    position: absolute;
+    /* Change positioning to show above */
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    margin-bottom: 8px; /* Change margin-top to margin-bottom */
+    background-color: #44433c;
+        /* 
+        e: 44433c
+        5c5a4f:  */
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Add z-index to ensure it shows above other elements */
+  }
+  
+.logout-button {
+  width: 100%;
+  padding: 8px;
+  background-color: transparent;
+  border: none;
+  color: #e2dfeb;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: #5c5a4f;
+}
+
+/* Confirmation Dialog Styles */
+.confirmation-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.confirmation-dialog {
+  background-color: #44433c;
+          /* 
+        e: 44433c
+        5c5a4f:  */
+  padding: 24px;
+  border-radius: 12px;
+  min-width: 300px;
+}
+
+.confirmation-dialog p {
+  color: #e2dfeb;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.confirmation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.confirmation-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.confirmation-buttons button:first-child {
+  background-color: white;
+  color: #000000;
+}
+
+
+.confirmation-buttons button:last-child {
+  background-color: transparent;
+  color:#fdfdfd;
+  border: #5c5a4f 2px solid;
+}
+        /* 
+        e: 44433c
+        5c5a4f:  */
+
+/* send btn color #ae5630 */

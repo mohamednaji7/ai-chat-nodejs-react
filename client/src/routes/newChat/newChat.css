@@ -1,0 +1,13 @@
+.newChat {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Add this to center vertically */
+    justify-content: center; 
+
+    @media screen and (max-width: 768px) {
+        justify-content:end;
+        
+    }
+}

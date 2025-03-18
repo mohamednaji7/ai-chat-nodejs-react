@@ -1,0 +1,19 @@
+.sidebar-toggle-button {
+  padding: 4px 8px;
+  background-color:  transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color: rgb(209, 202, 202);
+  /* color: #b48400 ; */
+  font-weight: 600;
+  transition: all 0.2s;
+}
+        /* 
+        e: 44433c
+        5c5a4f:  */
+.sidebar-toggle-button:hover {
+  /* color: rgb(51, 68, 194); */
+  color: white;
+  /* background-color: #e2dfeb; */
+}

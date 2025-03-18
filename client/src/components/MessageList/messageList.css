@@ -1,0 +1,101 @@
+.messages {
+    width: 47%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.messages p,
+.messages li {
+    margin: 8px 0px;
+}
+
+.message {
+    padding: 8px 16px;
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+}
+
+.message.user {
+    background-color: #464132;
+    border-radius: 20px;
+    align-self: self-end;
+}
+
+.messages > div:nth-last-child(2).message.assistant .feedback-btn {
+    visibility: visible;
+    color: #e4dbdb;
+}
+
+.endOfMsgs {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+}
+
+.message.assistant:hover .feedback-btn {
+    visibility: visible;
+    color: #e4dbdb;
+}
+
+
+.feedback-buttons {
+    position: relative;
+    right: 16px;
+    left: 4px;
+    bottom: 4px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.feedback-btn {
+    visibility: hidden;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.feedback-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.feedback-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+
+}
+
+
+
+.feedback-icon-active {
+    visibility: visible;
+    color: rgb(143, 130, 130);
+}
+
+
+.streaming-indicator .streaming-icon {
+    animation: pulse 1.7s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(0.8);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
