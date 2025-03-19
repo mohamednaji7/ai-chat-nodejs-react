@@ -18,7 +18,7 @@ const router = express.Router();
 
 
 router.post('/generate-title', async (req, res)=>{
-    console.log(`[ /prompt-stream ] [Gemini]`)
+    console.log(`[ /generate-title ] [Gemini]`)
     console.log({body: req.body})
 
 
@@ -32,9 +32,9 @@ router.post('/generate-title', async (req, res)=>{
         // console.log('Chat History:', history);
         const conversation = history.map((msg) => `${msg.role=='assistant'?'model':'user'}: ${msg.content}`).join('\n')
 
-        
+        // console.log(req.user.user_metadata)
         const result = await model.generateContent(
-            geTtitlePrompt(req.user.user_metadata.fullname|| " ", req.user.user_metadata.email, conversation)
+            geTtitlePrompt(req.user.user_metadata.full_name , req.user.user_metadata.email, conversation)
         );
         console.log(result.response.text())
         const newTitle =  result.response.text().trim()

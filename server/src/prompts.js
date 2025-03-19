@@ -1,8 +1,8 @@
 
+const instracution = `You are an AI intelligent assistant`;
 export const SystemInstruction = (fullname, email) =>{
-    const instracution = `You are an AI intelligent assistant`;
-    const constants = `The user name is ${fullname}
-The user email is ${email}`
+    const constants = `The user name is ${fullname}.
+The user email is ${email}.`
 
     const SystemInstruction = `${instracution}
 ${constants}`
@@ -16,14 +16,15 @@ ${retrievedContent}`
 }
 
 
-export const geTtitlePrompt = (fullname, email,  conversation) => {
+export const geTtitlePrompt = (full_name,  conversation) => {
+    const instracution = `Your task is to generate title for conversations going between the user (${full_name}) and the AI assistant.
+The title should be short and to the point, make it 3 words or less.
+the title will be displayed on the chat screen.`
 
-    return  `Only generate a title for the conversation so far.
-SystemInstruction:
-${SystemInstruction(fullname, email)}
-conversation:
+    return  `${instracution}
+
+The Conversation:
 ${conversation}
 
-Only generate a title for the conversation so far.`
-
+${instracution}`
 }
