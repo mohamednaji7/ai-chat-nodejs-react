@@ -17,9 +17,10 @@ ${retrievedContent}`
 
 
 export const geTtitlePrompt = (full_name,  conversation) => {
-    const instracution = `Your task is to generate title for conversations going between the user (${full_name}) and the AI assistant.
+    const instracution = `Your task is to generate title for conversations going between the user (${username}) and the AI assistant.
 The title should be short and to the point, make it 3 words or less.
-the title will be displayed on the chat screen.`
+The title will be displayed on the chat screen, so make suitable to be read by the user.
+only words, no numbers, special characters, or symbols.`
 
     return  `${instracution}
 
