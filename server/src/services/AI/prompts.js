@@ -1,12 +1,14 @@
 
 const instracution = `You are an AI intelligent assistant`;
+
 export const SystemInstruction = (fullname, email) =>{
     const constants = `The user name is ${fullname}.
 The user email is ${email}.`
-
-    const SystemInstruction = `${instracution}
-${constants}`
-    return SystemInstruction
+    return `${instracution}
+<user_info>
+${constants}
+</user_info>
+`
 }
 
 export const SysRagInst = (fullname, email, retrievedContent) =>{

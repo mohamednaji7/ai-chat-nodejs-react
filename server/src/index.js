@@ -13,17 +13,9 @@ import historyRouter from './routes/history.js'
 import generateTitleRouter from './routes/generateTitleAzure.js'
 import reactionRouter from './routes/reaction.js'
 
-import promptStreamRouter from './routes/promptStreamGeminiRouter.js';
 
+import promptStreamRouter from './routes/promptStream.js';
 
-
-
-
-// import promptStreamRouter from './routes/promptStream.js';
-
-
-// import testThreadRouter from './routes/testThread.js'
-// import threadsRouter from './routes/threads.js'
 
 
 

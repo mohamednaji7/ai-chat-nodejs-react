@@ -36,11 +36,11 @@ const ChatService = {
 
 
   // Add message to chat history
-  async addMessage(chatId, role, content) {
+  async addMessage(chat_id, role, content) {
     const { data, error } = await SupabaseClient
       .from('message')
       .insert({
-        chat_id: chatId,
+        chat_id,
         role,
         content,
       })

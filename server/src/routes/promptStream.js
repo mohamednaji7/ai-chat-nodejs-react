@@ -1,8 +1,6 @@
 import express from 'express';
 import streamChatCompletion from '../services/AI/ChatCompletion.js';
-import streamRagHelper from '../services/AI/RagHelper.js';
-import ChatService from '../services/Database/ChatService.js';
-import AuthService from '../services/Database/AuthService.js';
+import AuthService from '../services/Auth/AuthService.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -22,35 +20,23 @@ router.post('/prompt-stream', async (req, res)=>{
 
 
 
-        const threadId = chatId
 
-
-        if(await AuthService.authorizeUserChat(req.user.email, threadId) == false){
+        if(await AuthService.authorizeUserChat(req.user.email, chatId) == false){
             res.status(403).send('Unauthorized')
             return
         }
         
 
-        const threadIntelligence = await ChatService.getThreadIntelligence(threadId)
-        console.log({'threadIntelligence': threadIntelligence.privilege})
-
-        const params = [threadId,
+        const params = [chatId,
             prompt,
             req.user,
             res]
         
         let accumulatedResponse; 
 
-        if (threadIntelligence.privilege == 'privilege-rag') {
-            accumulatedResponse = await streamRagHelper(...params)
-        }
-        else if (threadIntelligence.privilege == 'privilege-none') {
-            accumulatedResponse = await streamChatCompletion(...params)
-        }
+        accumulatedResponse = await streamChatCompletion(...params)
         
-
-
-
+        
         // console.log({accumulatedResponse})
 
 
