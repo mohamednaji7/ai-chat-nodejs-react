@@ -1,22 +1,7 @@
-import SupabaseClient from './SupabaseClient.js';
+import SupabaseClient from '../SupabaseClient.js';
 
 const ProfileService = {
-  // Create a new user profile
-  async createUserProfile(userId, username, email, displayName) {
-    const { data, error } = await SupabaseClient
-      .from('user_profile')
-      .insert({ 
-        _id: userId,
-        email,
-        username,
-        display_name: displayName,
-      })
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
-  },
+ 
   // Get user profile
   async getUserProfile(userId){
     const {data, error} = await SupabaseClient
@@ -33,6 +18,8 @@ const ProfileService = {
       .from('chat')
       .select('*')
       .eq('user_id', userId)
+      // .neq('purpose', 'TEST')
+      // .neq('status', 'archived')
       .order('updated_at', { ascending: false });
     if (error) throw error;
     return data;

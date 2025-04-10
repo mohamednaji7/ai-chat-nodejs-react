@@ -54,9 +54,9 @@ const Chat = () => {
     }
   }, [data]);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, []);
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, []);
 
   
   if (!chatId) {

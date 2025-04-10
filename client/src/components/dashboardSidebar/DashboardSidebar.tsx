@@ -2,21 +2,25 @@ import { Link } from 'react-router-dom'
 import './dashboardSidebar.css'
 import ChatsList from '../chatsList/ChatsList';
 import UserButton from '../userButton/UserButton';
- 
 interface DashboardSidebarProps {
-  children?: React.ReactNode;
   setIsSidebarOpen: (isOpen: boolean) => void;
 }
 
-const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ children,setIsSidebarOpen }) => {
+const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ setIsSidebarOpen }) => {
+
   return (
     <div className='dashboardSidebar'>
       <div className="sidebar-header">
-        {children}
         <Link to='/start-chat' 
-          className='btn-new-chat'
-          onClick={() => setIsSidebarOpen(false)}
-          >Create a new chat</Link>
+            className='btn-new-chat'
+            onClick={() => setIsSidebarOpen(false)}
+        >Create a new chat</Link>
+        
+        { localStorage.getItem('isAdmin') && 
+          <a href='/admin-dashboard' className='btn-admin-dashboard'
+            >Go to the dashboard</a>
+        }
+
       </div>
       <hr />
       <ChatsList setIsSidebarOpen={setIsSidebarOpen} />

@@ -1,3 +1,16 @@
+:root {
+  --background-color: #30302e;
+  --background-sb-color: #232322;
+
+  --txt-main-color: #ececec;
+
+  --button-background-color: #44433c;
+  --button-hover-color: #5c5a4f;
+  --btn-text-color: rgb(209, 202, 202);
+  --btn-admin-text-color: #ececec;
+  --hr-color: #ddd;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -5,8 +18,8 @@
 }
 
 body {
-  background-color: #30302e;
-  color: #ececec;
+  background-color: var(--background-color);
+  color: var(--txt-main-color);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }

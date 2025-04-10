@@ -69,34 +69,25 @@ const DashboardLayout = () => {
 
   return (
     <div className='dashboardLayout'>
+      {/* Floating toggle button - always visible */}
+      <div className="floating-toggle">
+        <SidebarToggleButton 
+          isOpen={isSidebarOpen} 
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
+        />
+      </div>
+
       {isSidebarOpen && <div className="sidebar-backdrop" onClick={() => setIsSidebarOpen(false)} />}
       <div className={`${isSidebarOpen ? 'sidebar' : 'sidebar-closed'}`}>
-      <DashboardSidebar setIsSidebarOpen={setIsSidebarOpen}>
-          {isSidebarOpen && (
-            <div>
-              <SidebarToggleButton 
-                isOpen={isSidebarOpen} 
-                onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
-              />
-            </div>
-          )}
-        </DashboardSidebar>
+        <DashboardSidebar setIsSidebarOpen={setIsSidebarOpen} />
       </div>
       
       <div className="contentContiner">
         <div className="heading">
-          {!isSidebarOpen && (
-            <SidebarToggleButton 
-              isOpen={isSidebarOpen} 
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
-            />
-          )}       
           <div className="chat-title">{chatTitle}</div>
-
         </div>
         <div className="content"> <Outlet/> </div>
       </div>
-      
     </div>
   )
 }

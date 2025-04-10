@@ -1,3 +1,16 @@
+# 
+Deprecated.*
+Deprecated.*/
+IGNORE.*
+IGNORE.*/
+dev.*
+dev-*
+use.*
+use-*
+
+Deprecated
+IGNORE
+
 # Logs
 logs
 *.log
@@ -10,13 +23,9 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
-build
+
 *.local
 *.env
-*.env *
-*.env.*
-.vercel
-Deprecated
 
 # Editor directories and files
 .vscode/*

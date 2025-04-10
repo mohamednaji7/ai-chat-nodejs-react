@@ -37,6 +37,15 @@ const NewChat = () => {
       navigate(`/chat/${newChat._id}`);
     }
     else if(response.status === 401){
+      alert('Session expired. Please log in again.');
+      await supabase.auth.signOut();
+      navigate('/')
+    }
+    else {
+      await supabase.auth.signOut();
+      alert('An error occurred. Please try again.');
+      // log the error
+      console.error('Error creating chat:', response.statusText);
       navigate('/')
     }
   };

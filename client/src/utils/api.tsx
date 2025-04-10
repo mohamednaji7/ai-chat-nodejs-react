@@ -6,7 +6,7 @@ export const API_BASE = import.meta.env.VITE_API_URL ||
     ? 'http://localhost:3000' 
     : `http://${window.location.hostname}:3000`);
 
-export const updateMessageReaction = async (messageId: string, reaction: string) => {
+export const updateMessageReaction = async (chatId: string, messageId: string, reaction: string) => {
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) {
     throw new Error('No active session');

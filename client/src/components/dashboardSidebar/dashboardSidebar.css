@@ -3,7 +3,7 @@
     flex-direction: column;
     height: 100%;
     padding: 2rem 0.75rem 1rem;
-    background-color: #232322;
+    background-color: var(--background-sb-color);
     /* #f5f4ef for the text */
     
     .sidebar-header {
@@ -13,6 +13,8 @@
         gap: 1rem;
         justify-content: flex-end;
         padding: 0 0.5rem;
+        padding-top: 2.5rem;
+
     }
 
     .btn-new-chat{
@@ -21,28 +23,43 @@
         align-items: center;
         padding: 10px;
         border-radius: 10px;
-        background-color: #44433c;
+        background-color: var(--button-background-color);
         /* 
         e: 44433c
         5c5a4f:  */
-        color: rgb(209, 202, 202);
+        color: var(--btn-text-color);
         font-weight: 600;
         cursor: pointer;
         transition: background-color 0.2s;
         &:hover{
-            /* color: rgb(51, 68, 194); */
-            /* background-color: #e2dfeb; */
-            background-color: #5c5a4f;
+            background-color: var(--button-hover-color);
         }
     }
 
     hr{
         border: none;
         height: 2px;
-        background-color: #ddd;
+        background-color: var(--hr-color);
         opacity: 0.1;
         border-radius: 5px;
         margin: 20px 0px;
     }
     
+}
+.btn-admin-dashboard{
+    display: flex;
+    justify-content: center;
+    border: 2px solid var(--button-hover-color);
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--button-background-color);
+    color: var(--btn-admin-text-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    &:hover{
+        background-color: var(--button-hover-color);
+
+    }   
 }

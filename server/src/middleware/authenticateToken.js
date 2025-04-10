@@ -5,6 +5,7 @@ const authenticateToken = (req, res, next) => {
     const token = authHeader && authHeader.split(' ')[1];
   
     if (!token) {
+      console.log('No token provided');
       return res.status(400).json({ error: 'No token provided' });
     }
   

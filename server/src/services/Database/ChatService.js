@@ -1,4 +1,4 @@
-import SupabaseClient from './SupabaseClient.js';
+import SupabaseClient from '../SupabaseClient.js';
 
 const ChatService = {
 

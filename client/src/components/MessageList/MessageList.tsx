@@ -32,7 +32,7 @@ const MessageList = ({ isStreaming, chatId, messages, isLoading, error, endRef }
     // TODO: Implement feedback handling logic
     console.log('handleFeedback');
     console.log(`Message ${messageId} received ${feedback} feedback`);
-    updateMessageReaction(messageId, feedback)
+    updateMessageReaction(chatId, messageId, feedback)
 
     queryClient.setQueryData(['chat', chatId], (oldData: Message[]) => {
       const updatedMessages = oldData.map((msg) => {
@@ -52,41 +52,44 @@ const MessageList = ({ isStreaming, chatId, messages, isLoading, error, endRef }
       {messages.map((msg, index) => (
         <div className={`message ${msg.role}`} key={msg._id}>
           <Markdown>{msg.content}</Markdown>
-          {isStreaming && msg.role === 'assistant' && index === messages.length - 1 && (
-            <div className="streaming-indicator">
-              <Circle 
-                className="streaming-icon" 
-                size={16} 
-                strokeWidth={1.5} 
-                fill="currentColor" 
-              />
-            </div>)
-          }
-          {!isStreaming && msg.role === 'assistant' && (
-            <div className="feedback-buttons">
-              <button 
-                className={`feedback-btn ${msg.reaction === 'UP' ? 'reaction-active' : ''}`}
-                onClick={() => handleFeedback(msg._id, msg.reaction === 'UP' ? 'NONE' : 'UP')}
-                aria-label="Thumbs up"
-              >
-                <ThumbsUp 
-                  className={`feedback-icon ${msg.reaction === 'UP' ? 'feedback-icon-active' : ''}`}
-                  fill={msg.reaction === 'UP' ? 'currentColor' : 'none'}
-                  strokeWidth={1.5}
-                />
-              </button>
-              <button 
-                className={`feedback-btn ${msg.reaction === 'DOWN' ? 'reaction-active' : ''}`}
-                onClick={() => handleFeedback(msg._id, msg.reaction === 'DOWN' ? 'NONE' : 'DOWN')}
-                aria-label="Thumbs down"
-              >
-                <ThumbsDown 
-                  className={`feedback-icon ${msg.reaction === 'DOWN' ? 'feedback-icon-active' : ''}`}
-                  fill={msg.reaction === 'DOWN' ? 'currentColor' : 'none'}
-                  strokeWidth={1.5}
-                />
-              </button>
-            </div>
+          {msg.role === 'assistant' && (
+            <>
+              {isStreaming && index === messages.length - 1 ? (
+                <div className="streaming-indicator">
+                  <Circle 
+                    className="streaming-icon" 
+                    size={16} 
+                    strokeWidth={1.5} 
+                    fill="currentColor" 
+                  />
+                </div>
+              ) : (
+                <div className="feedback-buttons">
+                  <button 
+                    className={`feedback-btn ${msg.reaction === 'UP' ? 'reaction-active' : ''}`}
+                    onClick={() => handleFeedback(msg._id, msg.reaction === 'UP' ? 'NONE' : 'UP')}
+                    aria-label="Thumbs up"
+                  >
+                    <ThumbsUp 
+                      className={`feedback-icon ${msg.reaction === 'UP' ? 'feedback-icon-active' : ''}`}
+                      fill={msg.reaction === 'UP' ? 'currentColor' : 'none'}
+                      strokeWidth={1.5}
+                    />
+                  </button>
+                  <button 
+                    className={`feedback-btn ${msg.reaction === 'DOWN' ? 'reaction-active' : ''}`}
+                    onClick={() => handleFeedback(msg._id, msg.reaction === 'DOWN' ? 'NONE' : 'DOWN')}
+                    aria-label="Thumbs down"
+                  >
+                    <ThumbsDown 
+                      className={`feedback-icon ${msg.reaction === 'DOWN' ? 'feedback-icon-active' : ''}`}
+                      fill={msg.reaction === 'DOWN' ? 'currentColor' : 'none'}
+                      strokeWidth={1.5}
+                    />
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       ))}

@@ -1,11 +1,11 @@
 import express from 'express';
-import ChatService from '../services/ChatService.js';
+import ChatService from '../services/Database/ChatService.js';
 // import {embed} from '../services/OpenAI.js'
 // import {retrieveDocuments} from '../services/RAG.js'
 import dotenv from 'dotenv';
 dotenv.config();
 
-import {SystemInstruction} from '../prompts.js';
+import {SystemInstruction} from '../services/AI/prompts.js';
 // import {SysRagInst} from '../prompts.js';
 
 import {model} from '../services/Gemini.js'

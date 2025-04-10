@@ -1,3 +1,15 @@
+# 
+Deprecated.*
+IGNORE.*
+dev.*
+dev-*
+use.*
+use-*
+
+Deprecated
+IGNORE
+
+
 # Logs
 logs
 *.log
@@ -12,14 +24,9 @@ dist
 build
 dist-ssr
 
-build
 *.local
 *.env
-*.env *
-*.env.*
-.vercel
-Deprecated
-IGNORE
+
 
 # Editor directories and files
 .vscode/*
