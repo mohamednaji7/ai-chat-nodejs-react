@@ -1,6 +1,6 @@
+import './index.css'
 import React  from 'react'
 import ReactDom from 'react-dom/client'
-import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Home from './routes/home/Home'
@@ -12,7 +12,7 @@ import DashboardLayout from './layouts/dashboardLayout/DashboardLayout'
 
 
 
-import ErrorPage from './components/errorPage/ErrorPage'
+import ErrorPage from './routes/errorPage/ErrorPage'
 
 
 const router = createBrowserRouter([

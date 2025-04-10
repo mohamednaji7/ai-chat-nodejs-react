@@ -1,5 +1,5 @@
-import { useRouteError, isRouteErrorResponse } from 'react-router-dom';
 import './errorPage.css';
+import { useRouteError, isRouteErrorResponse } from 'react-router-dom';
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -30,6 +30,11 @@ const ErrorPage = () => {
           <span className="status-text">{errorDetails.statusText}</span>
         </div>
         <p className="error-message">{errorDetails.message}</p>
+        <div className="return-home">
+          <a href="/" className="return-link">
+            Return to Home
+          </a>
+        </div>
       </div>
     </div>
   );
