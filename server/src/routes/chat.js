@@ -13,20 +13,13 @@ router.post('/chat',  async (req, res)=>{
         // Create a new chat
         console.log({'[ChatService]' : '[createChat]'})
 
-        const generation = 'generation-0' 
-        let privilege = 'privilege-rag'
-        const modelName =  "model-gpt-4o-mini" 
+        const modelName = process.env.AZURE_OPENAI_MODELID
 
-        if (req.body.privilege === 'none' ){
-            privilege = 'privilege-none'
-        }
 
         const newChat = await ChatService.createChat(
             req.user.sub, 
             title, 
-            generation, 
-            privilege, 
-            modelName
+            modelName,
                     );
         // console.log('Chat Created:', newChat);
         res.status(200).send(newChat)
