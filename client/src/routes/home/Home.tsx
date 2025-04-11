@@ -49,7 +49,7 @@ const Home = () => {
             },
           }}
           providers={['google']}
-          redirectTo={window.location.origin}
+          redirectTo={`${window.location.origin}/start-chat`}
 
         />
 
