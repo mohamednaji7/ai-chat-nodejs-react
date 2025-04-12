@@ -8,7 +8,7 @@
     "start": "cd src && node index.js",
     "dev": "cd src && nodemon index.js",
     "dev-admin": "cd ../admin-dashboard && npm run build && cd ../server && nodemon index.js",
-    "build": "npm install && cd ../admin-dashboard && npm install && npm run build && cd ../client && npm install && npm run build"
+    "build": "npm install && cd ../client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",

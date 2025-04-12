@@ -19,6 +19,7 @@ export const updateMessageReaction = async (chatId: string, messageId: string, r
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
+      chatId,
       messageId,
       reaction
     })
