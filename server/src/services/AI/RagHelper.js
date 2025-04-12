@@ -146,7 +146,7 @@ const streamRagHelper = async (chatId, prompt, user, res) => {
         const userMsgData = await ChatService.addMessage(
             chatId, 'user',  prompt
         );
-        console.log(` ---- User (${user.loggingname? user.loggingname:user.username}) Message Added userMsgData._id`);
+        console.log(` ---- User (${user.loggingname? user.loggingname:user.user_metadata.full_name}) Message Added userMsgData._id`);
 
         // Save complete assistant message
         const assistantMsgData = await ChatService.addMessage(

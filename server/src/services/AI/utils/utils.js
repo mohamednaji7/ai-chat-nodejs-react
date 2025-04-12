@@ -30,7 +30,7 @@ const genTitle = async (user, history) => {
   console.log('chat completions')
   
   const completion = await getCompletion(
-          genTitlePrompt(user.username,  conversation)
+          genTitlePrompt(user.user_metadata.full_name,  conversation)
       )
       
   console.log('completion')
