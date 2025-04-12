@@ -16,15 +16,36 @@ const UserButton = () => {
   }
 
 
-  const confirmLogout =  () => {
-    try{
-      supabase.auth.signOut() // Supabase logout
-      navigate('/')
+  const confirmLogout =  async () => {
+
+    try {
+      // Wait for the sign-out process to complete
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        // Handle potential errors during sign out
+        console.error('Error signing out:', error);
+        alert(`Error logging out: ${error.message}`);
+        // Optionally clear local storage even on error if desired
+        // localStorage.removeItem('username');
+      } else {
+        // Sign out successful
+        console.log('User signed out successfully.');
+        // Clear relevant local storage *after* successful sign out
+        localStorage.removeItem('username');
+        // Navigate to the home page *after* sign out completes
+        // The onAuthStateChange listener in Home should handle the session state
+        navigate('/');
+      }
+    } catch (error) {
+      // Catch any unexpected errors during the async operation
+      console.error('Unexpected error during logout:', error);
+      alert(`An unexpected error occurred during logout.`);
+      // Clear local storage as a fallback if needed
+      localStorage.removeItem('username');
+      navigate('/'); // Navigate even if there was an unexpected error
     }
-    catch (error) {
-      alert(`Error logging out ${error}`)
-      localStorage.clear()
-    }
+
 
   }
 
