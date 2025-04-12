@@ -2,6 +2,8 @@ import { useState, useRef,  useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import './userButton.css'
 import supabase from '../../utils/supabase'
+import { useQueryClient } from '@tanstack/react-query'
+
 const UserButton = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
@@ -10,7 +12,8 @@ const UserButton = () => {
   const userInitial = username.charAt(0).toUpperCase()
   const menuRef = useRef<HTMLDivElement>(null)
   const confirmationRef = useRef<HTMLDivElement>(null) // Add this ref
-
+  const queryClient = useQueryClient()
+  
   const handleLogout = () => {
     setShowConfirmation(true)
   }
@@ -19,32 +22,27 @@ const UserButton = () => {
   const confirmLogout =  async () => {
 
     try {
-      // Wait for the sign-out process to complete
       const { error } = await supabase.auth.signOut();
-
       if (error) {
-        // Handle potential errors during sign out
-        console.error('Error signing out:', error);
-        alert(`Error logging out: ${error.message}`);
-        // Optionally clear local storage even on error if desired
-        // localStorage.removeItem('username');
+        console.error("Error signing out:", error);
       } else {
-        // Sign out successful
-        console.log('User signed out successfully.');
-        // Clear relevant local storage *after* successful sign out
-        localStorage.removeItem('username');
-        // Navigate to the home page *after* sign out completes
-        // The onAuthStateChange listener in Home should handle the session state
+        // The session will be automatically cleared and the auth state change will trigger
+        // your redirect to the home page
+        // delete all the data in the react query cache
+        queryClient.clear()
+        queryClient.resetQueries()
+        queryClient.removeQueries()
+
+        localStorage.clear()
+        // Redirect to the home page
         navigate('/');
+
+
       }
-    } catch (error) {
-      // Catch any unexpected errors during the async operation
-      console.error('Unexpected error during logout:', error);
-      alert(`An unexpected error occurred during logout.`);
-      // Clear local storage as a fallback if needed
-      localStorage.removeItem('username');
-      navigate('/'); // Navigate even if there was an unexpected error
+    } catch (err) {
+      console.error("Unexpected error during sign out:", err);
     }
+
 
 
   }
