@@ -96,7 +96,8 @@ import { fileURLToPath } from 'url';
 
 // Get the __dirname equivalent in ESM
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+let __dirname = path.dirname(__filename);
+__dirname = path.dirname(__dirname);
 
 // app.use('/admin-dashboard', express.static(path.join(__dirname, '../admin-dashboard/build')));
 // app.get('/admin-dashboard/*', requireAuth, requireAdmin,  (req, res)=>{
