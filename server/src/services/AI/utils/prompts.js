@@ -13,7 +13,7 @@ ${constants}
 
 export const SysRagInst = (fullname, email, retrievedContent) =>{
     return `${SystemInstruction(fullname, email)}
-Here is the retrieved documents for the user latest message:
+Here is the retrieved documents for the user last message:
 ${retrievedContent}`
 }
 

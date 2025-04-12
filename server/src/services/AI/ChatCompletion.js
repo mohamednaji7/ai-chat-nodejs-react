@@ -1,15 +1,7 @@
 import {openai} from '../AzureOpenAI.js';
-import {SystemInstruction} from './prompts.js';
+import {SystemInstruction} from './utils/prompts.js';
 import ChatService from '../Database/ChatService.js';
-
-const stageMsgs = (history, prompt) => {
-    const messages = history.map((msg) => ({
-        role: msg.role,
-        content: msg.content
-    }));
-    messages.push({ role: 'user', content: prompt });
-    return messages;
-}
+import {stageMsgs} from './utils/utils.js';
 
 const streamChatCompletion = async (chatId, prompt, user, res) => {
     console.log('[streamChatCompletion]')

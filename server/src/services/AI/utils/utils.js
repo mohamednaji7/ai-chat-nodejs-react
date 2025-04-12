@@ -1,6 +1,14 @@
-import { getCompletion } from '../AzureOpenAI.js';
+import { getCompletion } from '../../AzureOpenAI.js';
 import {genTitlePrompt} from './prompts.js';
 
+const stageMsgs = (history, prompt) => {
+  const messages = history.map((msg) => ({
+      role: msg.role,
+      content: msg.content
+  }));
+  messages.push({ role: 'user', content: prompt });
+  return messages;
+}
 
 const genTitle = async (user, history) => {
 
@@ -35,5 +43,6 @@ const genTitle = async (user, history) => {
 }
 
 export { 
-  genTitle
+  genTitle,
+  stageMsgs
 };

@@ -1,6 +1,6 @@
 import express from 'express';
 import ChatService from '../services/Database/ChatService.js';
-import {genTitle} from '../services/AI/utils.js'
+import {genTitle} from '../services/AI/utils/utils.js'
 import dotenv from 'dotenv';
 dotenv.config();
 
