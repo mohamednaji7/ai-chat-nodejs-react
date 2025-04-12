@@ -18,6 +18,9 @@ const Home = () => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      console.log('session changed');
+      console.log(session);
+      localStorage.setItem('username', session?.user.user_metadata.full_name || 'Guest');
     });
 
     return () => subscription.unsubscribe();
