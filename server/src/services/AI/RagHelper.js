@@ -140,6 +140,20 @@ const streamRagHelper = async (chatId, prompt, user, res) => {
 
        
         
+
+        
+        // Save user message first
+        const userMsgData = await ChatService.addMessage(
+            chatId, 'user',  prompt
+        );
+        console.log(` ---- User (${user.loggingname? user.loggingname:user.username}) Message Added userMsgData._id`);
+
+        // Save complete assistant message
+        const assistantMsgData = await ChatService.addMessage(
+            chatId, 'assistant', accumulatedResponse
+        );
+        console.log('Assistant Message Added', assistantMsgData._id);
+
         if(res){
             // Send final message with IDs
             res.write(`data: ${JSON.stringify({ 
@@ -149,16 +163,7 @@ const streamRagHelper = async (chatId, prompt, user, res) => {
             })}\n\n`);
         }
 
-        
-        // Save user message first
-        const userMsgData = await ChatService.addMessage({thread_id, role: 'user', content: prompt});
-        console.log(` ---- User (${user.loggingname? user.loggingname:user.username}) Message Added userMsgData._id`);
 
-        // Save complete assistant message
-        const assistantMsgData = await ChatService.addMessage({
-            thread_id, role: 'assistant', content: accumulatedResponse
-        });
-        console.log('Assistant Message Added', assistantMsgData._id);
         
         return accumulatedResponse
         

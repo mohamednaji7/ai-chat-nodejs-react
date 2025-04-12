@@ -32,8 +32,8 @@ const search_king_kong_quantum_growth = async (query) => {
 }
 const callFunction = async (name, args) => {
     console.log('callFunction', name)
-    if (name === "search_treatment_knowledge_base") {
-        return await search_treatment_knowledge_base(args.query);
+    if (name === "search_king_kong_quantum_growth") {
+        return await search_king_kong_quantum_growth(args.query);
     }
     console.error('Unknown function: ', name)
     throw new Error(`Unknown function: ${name}`);
