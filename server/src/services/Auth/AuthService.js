@@ -9,7 +9,7 @@ const AuthService = {
       return true;
     }
     const { data, error } = await SupabaseClient
-      .from('thread')
+      .from('chat')
       .select('_id')
       .eq('user_id', userId)
       // .neq('purpose', 'TEST')
@@ -26,11 +26,11 @@ const AuthService = {
     return found;
 
   },
-  async authorizeThreadMsg(threadId, msgId) {
+  async authorizeThreadMsg(threadName, msgId) {
     const { data, error } = await SupabaseClient
-      .from('message')
+      .from('thread_message')
       .select('_id')
-      .eq('thread_id', threadId)
+      .eq('thread_name', threadName)
       .order('updated_at', { ascending: false });
     if (error) throw error;
 
