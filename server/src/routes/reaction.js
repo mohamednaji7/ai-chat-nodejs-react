@@ -20,7 +20,7 @@ router.post('/reaction', async (req, res)=>{
 
 
     try{
-        if(await AuthService.authorizeUserChat(req.user.email, chatId) == false){
+        if(await AuthService.authorizeUserChat(req.user.sub, chatId) == false){
             res.status(403).send('Unauthorized')
             console.log('Unauthorized. User not authorized to access this chat.')
             console.log({email: req.user.email})
@@ -28,11 +28,9 @@ router.post('/reaction', async (req, res)=>{
             throw new Error('Unauthorized. User not authorized to access this chat.')
         }
     
-        if(await AuthService.authorizeThreadMsg(chatId, messageId) == false){
-            res.status(403).send('Unauthorized')
-            console.log('Unauthorized. User not authorized to access this message.')
-            throw new Error('Unauthorized. User not authorized to access this message.')
-        }
+
+
+        // thread names are unique and fixed
 
         
 

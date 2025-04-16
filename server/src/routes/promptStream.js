@@ -21,7 +21,7 @@ router.post('/prompt-stream', async (req, res)=>{
 
 
 
-        if(await AuthService.authorizeUserChat(req.user.email, chatId) == false){
+        if(await AuthService.authorizeUserChat(req.user.sub, chatId) == false){
             res.status(403).send('Unauthorized')
             return
         }
