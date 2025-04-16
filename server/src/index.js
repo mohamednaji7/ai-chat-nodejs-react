@@ -10,7 +10,8 @@ import cookieParser from 'cookie-parser';
 import chatRouter from './routes/chat.js'
 import chatsRouter from './routes/chats.js'
 import historyRouter from './routes/history.js'
-import generateTitleRouter from './routes/generateTitleAzure.js'
+import agentHistoryRouter from './routes/agentHistory.js'
+import generateTitleRouter from './routes/generateTitle.js'
 import reactionRouter from './routes/reaction.js'
 
 
@@ -85,6 +86,9 @@ app.use('/api/v1',authenticateToken, historyRouter);
 app.use('/api/v1',authenticateToken, promptStreamRouter);
 app.use('/api/v1',authenticateToken, generateTitleRouter);
 app.use('/api/v1',authenticateToken, reactionRouter);
+
+app.use('/api/v1',authenticateToken, agentHistoryRouter);
+
 
 
 

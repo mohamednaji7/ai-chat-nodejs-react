@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Home from './routes/home/Home'
 import Chat from './routes/chat/Chat'
+import Agent from './routes/agent/Agent'
 import NewChat from './routes/newChat/NewChat'
 
 import RootLayout from './layouts/rootLayout/RootLayout'
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
           {
             path: '/chat/:id',
             element: <Chat />
+          }
+          ,
+          {
+            path: 'agent/:name',
+            element: <Agent />
           }
         ]
       }

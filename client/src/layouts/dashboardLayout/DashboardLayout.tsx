@@ -62,7 +62,9 @@ const DashboardLayout = () => {
   
 
   
-  const chatTitle = userChats?.find((chat) => chat._id === chatId)?.title || 'New Chat';
+  const chatTitle = userChats?.find((chat) => chat._id === chatId)?.title || (chatId==='personal-agent' ? 'Personal Agent' : 'New Chat');
+  // log the chatId
+  console.log('chatId', chatId)
   // const chatTitle = userChats?.find((chat) => chat._id === chatId)?.title 
   console.log('chatTitle', chatTitle)
   

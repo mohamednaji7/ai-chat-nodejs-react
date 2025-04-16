@@ -1,6 +1,5 @@
 import express from 'express';
-// import streamChatCompletion from '../services/AI/ChatCompletion.js';
-import streamRagHelper from '../services/AI/RagHelper.js';
+import streamChatCompletion from '../services/AI/ChatCompletion.js';
 import AuthService from '../services/Auth/AuthService.js';
 
 import dotenv from 'dotenv';
@@ -35,8 +34,7 @@ router.post('/prompt-stream', async (req, res)=>{
         
         let accumulatedResponse; 
 
-        // accumulatedResponse = await streamChatCompletion(...params)
-        accumulatedResponse = await streamRagHelper(...params)
+        accumulatedResponse = await streamChatCompletion(...params)
         
         
         

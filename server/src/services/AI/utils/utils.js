@@ -1,4 +1,4 @@
-import { getCompletion } from '../../AzureOpenAI.js';
+import { getCompletion } from '../../GeminiAzureOpenAI.js';
 import {genTitlePrompt} from './prompts.js';
 
 const stageMsgs = (history, prompt) => {

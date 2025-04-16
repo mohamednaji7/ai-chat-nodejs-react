@@ -11,6 +11,13 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ setIsSidebarOpen })
   return (
     <div className='dashboardSidebar'>
       <div className="sidebar-header">
+        <Link
+          to="/agent/personal-agent"
+          className="agent-chat-link"
+          onClick={() => setIsSidebarOpen(false)}
+        >
+          Personal Agent Chat
+        </Link>
         <Link to='/start-chat' 
             className='btn-new-chat'
             onClick={() => setIsSidebarOpen(false)}

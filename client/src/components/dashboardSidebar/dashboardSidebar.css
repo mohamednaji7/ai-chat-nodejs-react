@@ -36,6 +36,26 @@
         }
     }
 
+    .agent-chat-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: var(--button-background-color);
+        color: var(--btn-admin-text-color);
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-bottom: 4px;
+        transition: background-color 0.2s, color 0.2s;
+        text-decoration: none;
+    }
+    .agent-chat-link:hover, .agent-chat-link:focus {
+        background-color: var(--button-hover-color);
+        color: var(--btn-text-color);
+    }
+
     hr{
         border: none;
         height: 2px;
