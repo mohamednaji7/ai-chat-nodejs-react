@@ -19,6 +19,7 @@ import promptStreamRouter from './routes/promptStream.js';
 
 
 
+import whatsappWebhookRouter from './routes/whatsapp.js';
 
 // Import middleware
 import  authenticateToken from './middleware/authenticateToken.js';
@@ -93,6 +94,9 @@ app.use('/api/v1',authenticateToken, agentHistoryRouter);
 
 
 // ********************************************************************************
+
+// WhatsApp webhook (no authentication)
+app.use('/webhook/whatsapp', whatsappWebhookRouter);
 
 // Serve Static 
 import path from 'path'
