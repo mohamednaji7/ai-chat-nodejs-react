@@ -93,7 +93,7 @@
         padding: 10px 12px;
         cursor: pointer;
         transition: background-color 0.2s;
-        color: var(--text-color);
+        color: var(--text-color-main);
     }
 
     .project-option.selected {
