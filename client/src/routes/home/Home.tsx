@@ -10,19 +10,20 @@ import { Session } from '@supabase/gotrue-js'; // Import the Session type from @
 
 const Home = () => {
   const [session, setSession] = useState<Session | null>(null); // Update the type of session state
-
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
-
+    
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       console.log('session changed');
       console.log(session);
-      localStorage.setItem('username', session?.user.user_metadata.full_name || 'Guest');
+      localStorage.setItem('username', session?.user?.user_metadata?.full_name);
+      console.log("session:")
+      console.log(session?.user?.user_metadata?.full_name)
     });
 
     return () => subscription.unsubscribe();
