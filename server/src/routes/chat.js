@@ -15,7 +15,7 @@ router.post('/chat',  async (req, res)=>{
         // Create a new chat
         console.log({'[ChatService]' : '[createChat]'})
 
-        const modelName = process.env.AZURE_OPENAI_MODELID
+        const modelName = process.env.LLM_MODEL_NAME
 
 
         const newChat = await ChatService.createChat(
