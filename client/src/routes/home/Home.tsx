@@ -1,3 +1,5 @@
+// src/routes/home/Home.tsx
+
 import './home.css';
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';

@@ -1,3 +1,5 @@
+// src/services/Auth/AuthService.js
+
 import SupabaseClient from '../SupabaseClient.js';
 import {isAdmin} from './data.js';
 

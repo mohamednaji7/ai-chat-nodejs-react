@@ -1,10 +1,12 @@
+import './messageList.css';
 import { RefObject } from 'react';
-import Markdown from 'react-markdown';
 import { ThumbsUp, ThumbsDown } from "lucide-react";
-import {updateMessageReaction} from '../../utils/api';
+import { updateMessageReaction } from '../../utils/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { Circle } from "lucide-react";
-import './messageList.css';
+import { useFileMentionProcessor } from './FileMentionProcessor';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface Message {
   _id: string;
@@ -23,16 +25,16 @@ interface MessageListProps {
 }
 
 const MessageList = ({ isStreaming, chatId, messages, isLoading, error, endRef }: MessageListProps) => {
-  const queryClient = useQueryClient(); // Get the queryClient instance
+  const queryClient = useQueryClient();
+  const { renderMessageContent } = useFileMentionProcessor();
 
   if (isLoading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">An error has occurred: {error.message}</div>;
 
   const handleFeedback = (messageId: string, feedback: 'UP' | 'DOWN' | 'NONE') => {
-    // TODO: Implement feedback handling logic
     console.log('handleFeedback');
     console.log(`Message ${messageId} received ${feedback} feedback`);
-    updateMessageReaction(chatId, messageId, feedback)
+    updateMessageReaction(chatId, messageId, feedback);
 
     queryClient.setQueryData(['chat', chatId], (oldData: Message[]) => {
       const updatedMessages = oldData.map((msg) => {
@@ -43,15 +45,32 @@ const MessageList = ({ isStreaming, chatId, messages, isLoading, error, endRef }
       });
       return updatedMessages;
     });
+  };
 
-
+  // Enhanced content renderer that supports markdown tables
+  const renderEnhancedMessageContent = (content: string) => {
+    // Check if content contains table syntax (basic detection)
+    const hasTable = content.includes('|') && content.includes('---');
+    
+    if (hasTable) {
+      // Render as markdown with table support
+      return (
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {content}
+        </ReactMarkdown>
+      );
+    } else {
+      // Use existing file mention processor for other content
+      return renderMessageContent(content);
+    }
   };
 
   return (
     <div className="messages">
       {messages.map((msg, index) => (
         <div className={`message ${msg.role}`} key={msg._id}>
-          <Markdown>{msg.content}</Markdown>
+          {renderEnhancedMessageContent(msg.content)}
+          
           {msg.role === 'assistant' && (
             <>
               {isStreaming && index === messages.length - 1 ? (

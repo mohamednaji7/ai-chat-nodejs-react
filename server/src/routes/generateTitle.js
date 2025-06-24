@@ -1,3 +1,5 @@
+// src/routes/generateTitleAzure.js
+
 import express from 'express';
 import ChatService from '../services/Database/ChatService.js';
 import {genTitle} from '../services/AI/utils/utils.js'
@@ -17,7 +19,7 @@ router.post('/generate-title', async (req, res)=>{
 
         // Get chat history
         console.log('[ChatService] [getChatHistory]');
-        const history = await ChatService.getChatHistory(chatId);
+        const history = await ChatService.getChatHistoryforUI(chatId);
 
         if (!history) {
             throw new Error(`No chat history found for chatId: ${chatId}`);

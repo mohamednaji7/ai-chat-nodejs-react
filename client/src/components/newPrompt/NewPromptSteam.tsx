@@ -1,3 +1,5 @@
+// src/components/newPrompt/NewPromptSteam.tsx
+
 import { useEffect, useRef } from 'react';
 import './newPrompt.css'
 import { useLocation } from 'react-router-dom'

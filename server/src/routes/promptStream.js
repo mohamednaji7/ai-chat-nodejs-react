@@ -1,6 +1,10 @@
+// src/routes/promptStream.js
+
 import express from 'express';
-import streamChatCompletion from '../services/AI/ChatCompletion.js';
+import ChatCompletionStreamer from '../services/AI/ChatCompletionStreamer.js';
+import AgentStreamer from '../services/AI/AgentStreamer.js';
 import AuthService from '../services/Auth/AuthService.js';
+import SupabaseClient from '../services/SupabaseClient.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -25,20 +29,32 @@ router.post('/prompt-stream', async (req, res)=>{
             res.status(403).send('Unauthorized')
             return
         }
-        
 
-        const params = [chatId,
+        const { data, error } = await SupabaseClient
+            .from('chat')
+            .select('project_id')
+            .eq('_id', chatId)
+            .single();
+
+        if (error) throw error;
+            
+        const projectId = data.project_id
+
+        const session = {
+            projectId,
+            chatId
+        }
+        const params = [session,
             prompt,
             req.user,
             res]
-        
-        let accumulatedResponse; 
 
-        accumulatedResponse = await streamChatCompletion(...params)
+        if (process.env.AI_PROVIDER === 'azure'){
+            await AgentStreamer(...params)
+        }else{
+            await ChatCompletionStreamer(...params)
+        }
         
-        
-        
-        // console.log({accumulatedResponse})
 
 
         

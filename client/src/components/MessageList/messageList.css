@@ -1,6 +1,9 @@
+/* src/components/MessageList/messageList.css */
+
 .messages {
     /* width: 47%; */
-    width: 768px;
+    width: var(--chat-width);
+    
 
     display: flex;
     flex-direction: column;
@@ -29,14 +32,14 @@
 }
 
 .message.user {
-    background-color: #464132;
+    background-color: var(--message-user-background);
     border-radius: 20px;
     align-self: self-end;
 }
 
 .messages > div:nth-last-child(2).message.assistant .feedback-btn {
     visibility: visible;
-    color: #e4dbdb;
+    color: var(--text-color-main);
 }
 
 .endOfMsgs {
@@ -47,7 +50,7 @@
 
 .message.assistant:hover .feedback-btn {
     visibility: visible;
-    color: #e4dbdb;
+    color: var(--text-color-main);
 }
 
 
@@ -75,7 +78,7 @@
 
 
 .feedback-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--button-background-color);
 }
 
 .feedback-icon {
@@ -88,7 +91,7 @@
 
 .feedback-icon-active {
     visibility: visible;
-    color: rgb(143, 130, 130);
+    color: var(--text-color-main);
 }
 
 
@@ -110,3 +113,160 @@
       opacity: 1;
     }
   }
+
+/* Markdown styling */
+.message p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+}
+
+.message h1, .message h2, .message h3, .message h4, .message h5, .message h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+.message h1 {
+    font-size: 1.8em;
+}
+
+.message h2 {
+    font-size: 1.5em;
+}
+
+.message h3 {
+    font-size: 1.3em;
+}
+
+.message h4 {
+    font-size: 1.1em;
+}
+
+.message ul,
+.message ol {
+    margin-bottom: 1em;
+    padding-left: 20px;
+}
+
+.message li {
+    margin-bottom: 0.5em;
+}
+
+.message blockquote {
+    margin: 1em 0;
+    padding: 1em;
+    border-left: 4px solid var(--hr-color);
+    color: var(--text-color-main);
+    background-color: var(--button-background-color);
+}
+
+.message pre {
+    background-color: var(--button-background-color);
+    color: var(--text-color-main);
+    padding: 1em;
+    overflow-x: auto;
+    border-radius: 4px;
+    margin-bottom: 1em;
+}
+
+.message code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 0.9em;
+}
+
+.message pre code {
+    display: block;
+}
+
+/* Enhanced table styling for markdown tables */
+.message table {
+    margin-bottom: 1em;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9em;
+    background-color: var(--button-background-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message th,
+.message td {
+    border: 1px solid var(--hr-color);
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.message th {
+    background-color: var(--button-background-color);
+    font-weight: 600;
+    color: var(--text-color-main);
+    border-bottom: 2px solid var(--hr-color);
+}
+
+.message td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.message tr:nth-child(even) td {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.message tr:hover td {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Responsive table handling */
+
+.message table {
+    min-width: 100%;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 768px) {
+    .message table {
+        font-size: 0.8em;
+    }
+    
+    .message th,
+    .message td {
+        padding: 8px 12px;
+    }
+}
+
+.message hr {
+    margin: 1em 0;
+    border: 0;
+    border-top: 1px solid var(--hr-color);
+}
+
+.message strong {
+    font-weight: bold;
+}
+
+.message em {
+    font-style: italic;
+}
+
+
+
+.artifact-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--file-button-background);
+  color: var(--button-text-color);
+  padding: 1.2rem 1.5rem;
+  border: 0.1rem solid;
+  border-radius: 1rem;
+  border-color: var(--file-button-border-color);
+  margin: 0 0.25rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  width: auto;
+  min-width: 30%;
+  text-decoration: none;
+}

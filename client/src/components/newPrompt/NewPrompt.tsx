@@ -1,3 +1,5 @@
+// src/components/newPrompt/NewPrompt.tsx
+
 import { useEffect, useRef, FormEvent } from 'react'
 import './newPrompt.css'
 import { useMutation, useQueryClient } from '@tanstack/react-query'

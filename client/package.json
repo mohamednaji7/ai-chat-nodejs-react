@@ -13,26 +13,22 @@
     "buildPreviewExpose": "tsc -b && vite build && vite preview --host 0.0.0.0"
   },
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
     "@supabase/auth-ui-react": "^0.4.7",
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/gotrue-js": "^2.69.1",
+    "@supabase/supabase-js": "^2.50.1",
     "@tanstack/react-query": "^5.66.5",
-    "@types/js-cookie": "^3.0.6",
+    "axios": "^1.10.0",
     "dotenv": "^16.4.7",
-    "js-cookie": "^3.0.5",
     "lucide-react": "^0.479.0",
-    "openai": "^4.85.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^9.0.3",
     "react-router-dom": "^7.1.5",
-    "ui": "^0.2.4"
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@tanstack/eslint-plugin-query": "^5.66.1",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",

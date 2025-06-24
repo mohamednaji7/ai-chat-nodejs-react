@@ -1,3 +1,5 @@
+// src/components/ChatInput/ChatInput.tsx
+
 import { FormEvent, useRef } from 'react';
 import './ChatInput.css';
 

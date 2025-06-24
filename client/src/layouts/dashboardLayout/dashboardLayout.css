@@ -1,3 +1,5 @@
+/* src/layouts/dashboardLayout/dashboardLayout.css */
+
 /* dashboardLayout.css */
 .dashboardLayout {
   display: flex;
@@ -10,21 +12,46 @@
 /* New floating toggle styles */
 .floating-toggle {
   position: fixed;
-  top: 20px;
+  top: 13px;
   left: 20px;
   z-index: 2000; /* Higher than everything else */
 }
 
+/* Floating file explorer toggle button styles */
+.floating-toggle-right {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  z-index: 2000; /* Higher than everything else */
+}
+
+.file-explorer-toggle-btn {
+  background: none;
+  border: none;
+  color: #fff; /* Adjust color as needed */
+  cursor: pointer;
+  /* padding: 5px; */
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-explorer-toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Hover effect */
+}
+
 /* Sidebar styles */
 .sidebar {
-  flex: 1;
+  width: 280px;
+  flex: 0 0 280px;
+  transition: width 0.3s ease-in-out;
 
   @media screen and (max-width: 768px) {
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
-    width: 280px;
     z-index: 1000;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
   }
@@ -32,17 +59,40 @@
 
 .sidebar-closed {
   width: 0;
-  display: none;
+  flex: 0 0 0;
   overflow: hidden;
 }
 
+/* File Explorer Container */
+.file-explorer-container {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--file-explorer-width);
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%);
+  z-index: 1000;
+}
+
+.file-explorer-container.open {
+  transform: translateX(0);
+}
+
+.file-explorer-container.expanded {
+  width: 100vw !important;
+  right: 0;
+}
+
 .contentContiner {
-  flex: 6;
+  flex: 1;
   height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding-top: 20px;
+  transition: all 0.3s ease-in-out; /* Add transition for smooth movement */
+  margin-right: 0;
 
   @media screen and (max-width: 768px) {
     flex: 1;
@@ -58,6 +108,7 @@
     position: relative;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
+    padding-right: 10px; /* Add padding to prevent overlap with toggle button */
         
     .chat-title {
       position: absolute;
@@ -73,6 +124,15 @@
     flex: 1;
     overflow-y: auto;
   }
+}
+
+/* Adjust content container when file explorer is open */
+.contentContiner.with-file-explorer {
+  margin-right: var(--file-explorer-width);
+}
+
+.contentContiner.with-file-explorer.expanded {
+  margin-right: 0 !important;
 }
 
 .sidebar-backdrop {

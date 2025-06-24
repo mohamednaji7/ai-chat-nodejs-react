@@ -1,3 +1,5 @@
+// src/routes/history.js
+
 import express from 'express';
 import ChatService from '../services/Database/ChatService.js';
 import AuthService from '../services/Auth/AuthService.js';
@@ -17,7 +19,7 @@ router.get('/history/:id',  async (req, res)=>{
 
         // Get chat history
         console.log('[ChatService] [getChatHistory]')
-        let history = await ChatService.getChatHistory(threadId);
+        let history = await ChatService.getChatHistoryforUI(threadId);
         // console.log('Chat History:', history);
         
         // history = history.filter((message) => {

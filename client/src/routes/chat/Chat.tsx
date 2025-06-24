@@ -1,3 +1,5 @@
+// src/routes/chat/Chat.tsx
+
 import './chat.css';
 import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -7,20 +9,33 @@ import MessageList from '../../components/MessageList/MessageList';
 import NewPrompt from '../../components/newPrompt/NewPromptSteam';
 import { useState } from 'react';
 import supabase from '../../utils/supabase';
+import { useProjectContext } from '../../contexts/ProjectContext';
 
 const Chat = () => {
   const path = useLocation().pathname;
-  const chatId = path.split('/').pop();
+  const chatId = path.split('/').pop(); // and before ?
+  // Extract projectNumber (pn) from the query string
+  const searchParams = new URLSearchParams(location.search);
+  const projectNumber = searchParams.get('pn');
   const endRef = useRef<HTMLDivElement>(null!);
   const navigate = useNavigate();
   const [isStreaming, setIsStreaming] = useState(false);
-
+  const { projects, setSelectedProjectId, isLoadingProjects } = useProjectContext();
 
 
   const scrollToBottom = () => {
     endRef.current?.scrollIntoView({ behavior: 'instant' });
   };
+  useEffect(() => {
+    if (!projects || !chatId) return;
+    for (const project of projects) {
+      if (project.number == projectNumber){
+        setSelectedProjectId(project._id);
+        return;
+      }
+    }
 
+  }, [isLoadingProjects]);
 
 
   const { error, data, isFetching } = useQuery({
@@ -58,6 +73,7 @@ const Chat = () => {
   //   scrollToBottom();
   // }, []);
 
+  
   
   if (!chatId) {
     return <div>Invalid chat ID</div>;

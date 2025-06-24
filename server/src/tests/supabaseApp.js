@@ -1,3 +1,5 @@
+// src/tests/supabaseApp.js
+
 import dotenv from 'dotenv';
 import { accountService, chatService } from '../services/supabaseApp.js'
 

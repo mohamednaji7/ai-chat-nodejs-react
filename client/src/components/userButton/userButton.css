@@ -1,42 +1,53 @@
+/* src/components/userButton/userButton.css */
+
+.logout-wrapper {
+  position: relative;
+}
+
+.confirmation-popover {
+  padding: 16px;
+  min-width: 220px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.confirmation-popover p {
+  color: var(--text-color-main);
+  text-align: center;
+}
+
 .userButtonContainer {
-    position: relative;
-    z-index: 2;
-     /* Add z-index to ensure proper stacking context */
-  }
-  
+  position: relative;
+  z-index: 2;
+}
+
 .userButton {
   position: relative;
-  z-index: 2; /* Add z-index to ensure proper stacking context */
-
+  z-index: 3;
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 16px;
-  background-color: #44433c;
-        /* 
-        e: 44433c
-        5c5a4f:  */
-  /* hsl(48deg 100% 29.53% / 80%) ; */
-
+  background-color: var(--user-button-background);
   border-radius: 10px;
-  cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .userButton:hover {
-  background-color: #5c5a4f;
+  cursor: pointer;
+  background-color: var(--user-button-hover);
 }
 
 .userButton .avatar {
   width: 32px;
   height: 32px;
-  background-color: #58574f;
+  background-color: var(--avatar-background);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  color: #e2dfeb;
+  color: var(--button-text-color);
 }
 
 .userButton .userInfo {
@@ -46,46 +57,128 @@
 
 .userButton .username {
   font-weight: 600;
-  color: #e2dfeb;
+  color: var(--text-color-main);
 }
 
 .userButton .role {
   font-size: 0.8rem;
-  color: #8f8b9b;
+  color: var(--button-text-color);
 }
 
 /* Popup Menu Styles */
 .popup-menu {
-    position: absolute;
-    /* Change positioning to show above */
-    bottom: 100%;
-    left: 0;
-    right: 0;
-    margin-bottom: 8px; /* Change margin-top to margin-bottom */
-    background-color: #44433c;
-        /* 
-        e: 44433c
-        5c5a4f:  */
-    border-radius: 8px;
-    padding: 8px;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Add z-index to ensure it shows above other elements */
-  }
-  
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  margin-bottom: 8px;
+  background-color: var(--popup-menu-bg);
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Theme Selector Styles */
+.theme-selector-wrapper {
+  position: relative;
+}
+
+.theme-selector-button {
+  width: 100%;
+  padding: 8px;
+  background-color: transparent;
+  border: none;
+  color: var(--text-color-main);
+  cursor: pointer;
+  text-align: left;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.theme-selector-button:hover {
+  background-color: var(--user-button-hover);
+}
+
+.theme-selector-button .theme-dots {
+  margin-left: auto;
+  opacity: 0.7;
+}
+
+.theme-selector-menu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 8px;
+  background-color: var(--popup-menu-bg);
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.theme-option {
+  width: 100%;
+  padding: 8px 12px;
+  background-color: transparent;
+  border: none;
+  color: var(--text-color-main);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.theme-option:hover {
+  background-color: var(--user-button-hover);
+}
+
+.theme-option.active {
+  background-color: var(--user-button-hover);
+  position: relative;
+}
+
+.theme-option .checkmark {
+  margin-left: auto;
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.theme-toggle-button,
 .logout-button {
   width: 100%;
   padding: 8px;
   background-color: transparent;
   border: none;
-  color: #e2dfeb;
+  color: var(--text-color-main);
   cursor: pointer;
   text-align: left;
   border-radius: 4px;
   transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
+.theme-toggle-button:hover,
 .logout-button:hover {
-  background-color: #5c5a4f;
+  background-color: var(--user-button-hover);
 }
 
 /* Confirmation Dialog Styles */
@@ -95,7 +188,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* background-color: rgba(0, 0, 0, 0.5); */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,17 +196,14 @@
 }
 
 .confirmation-dialog {
-  background-color: #44433c;
-          /* 
-        e: 44433c
-        5c5a4f:  */
+  background-color: var(--popup-menu-bg);
   padding: 24px;
   border-radius: 12px;
   min-width: 300px;
 }
 
 .confirmation-dialog p {
-  color: #e2dfeb;
+  color: var(--text-color-main);
   margin-bottom: 20px;
   text-align: center;
 }
@@ -134,18 +224,31 @@
 }
 
 .confirmation-buttons button:first-child {
-  background-color: white;
-  color: #000000;
+  background-color: var(--avatar-background);
+  color: var(--button-text-color);
 }
 
+.confirmation-buttons button:first-child:hover {
+  opacity: 0.9;
+}
 
 .confirmation-buttons button:last-child {
-  background-color: transparent;
-  color:#fdfdfd;
-  border: #5c5a4f 2px solid;
+  background-color: var(--user-button-background);
+  color: var(--text-color-main);
 }
-        /* 
-        e: 44433c
-        5c5a4f:  */
+
+.confirmation-buttons button:last-child:hover {
+  background-color: var(--user-button-hover);
+}
+
+/* Responsive adjustments for theme selector */
+@media (max-width: 768px) {
+  .theme-selector-menu {
+    left: auto;
+    right: 0;
+    margin-left: 0;
+    margin-right: 8px;
+  }
+}
 
 /* send btn color #ae5630 */

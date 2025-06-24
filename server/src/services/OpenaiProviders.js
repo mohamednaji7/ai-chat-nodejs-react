@@ -1,7 +1,12 @@
+// src/services/AzureOpenAI.js
+
 import OpenAI from 'openai';
 import { AzureOpenAI } from 'openai';
 import dotenv from 'dotenv';
 dotenv.config();
+
+
+const EMBEDDING_MODEL = process.env.AZURE_EMBEDDING_DEPLOYMENT
 
 
 
@@ -54,10 +59,10 @@ const getClient = () => {
 };
 
 const openai = getClient();
-// const openiRAG = getClient(); // TO UPDATE
+
+const openiRAG = getClient(EMBEDDING_MODEL);
 
 const getEmbedding = async (text) => {
-  throw new Error('Not updated');
   const response = await openiRAG.embeddings.create({
     input: text,
     // model: EMBEDDING_MODEL,
@@ -67,6 +72,7 @@ const getEmbedding = async (text) => {
 };
 
 
+
 const getCompletion = async (userMessage) => {
   const completion = await openai.chat.completions.create({
     messages: [{ role: "user", content: userMessage }],
@@ -74,7 +80,6 @@ const getCompletion = async (userMessage) => {
 });
   return completion
 }
-
 
 
 export { 

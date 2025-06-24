@@ -1,0 +1,256 @@
+/* src/components/FileExplorerSidebar/FileExplorerSidebar.css */
+
+.file-explorer-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  /* width: 900px; */
+  width: var(--file-explorer-width);
+   /* Fixed width of 900px */
+  height: 100%;
+  background-color: var(--sidebar-background);
+  color: var(--text-color-main);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.file-explorer-sidebar.expanded {
+  width: 100%;
+}
+
+.file-explorer-sidebar.closed {
+  width: 0;
+}
+
+.file-explorer-sidebar .sidebar-header {
+  padding-top: 15px;
+  border-bottom: 1px solid var(--hr-color);
+  padding-bottom: 15px;
+  padding-left: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expand-button {
+  background: none;
+  border: none;
+  color: var(--text-color-main);
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.expand-button:hover {
+  color: var(--button-background-hover);
+}
+
+.file-explorer-sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  width: 100%;
+}
+
+.file-list {
+  min-width: 150px;
+  max-width: 350px;
+  width: 30%;
+  font-size: 14px;
+  padding: 10px;
+  border-right: 1px solid var(--hr-color);
+  overflow-y: auto;
+}
+
+.file-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.file-list li {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--hr-color);
+}
+
+.file-list li:hover {
+  background-color: var(--button-background-hover);
+}
+
+.file-list li.selected {
+  background-color: var(--button-background-color);
+  /* font-weight: bold; */
+}
+
+.file-mention {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  background: var(--popup-menu-bg);
+  border-radius: 8px;
+  /* padding: 18px 24px; */
+  color: var(--text-color-main);
+  width: 100%;
+  overflow-x: auto;
+  /* overflow-y: auto; */
+  height: 99%;
+}
+
+.file-mention pre {
+  font-size: 1.1rem;
+  background: var(--popup-menu-bg);
+  border-radius: 8px;
+  padding: 18px 24px;
+  line-height: 1.7;
+  color: var(--text-color-main);
+  margin-bottom: 0;
+}
+
+.file-mention .json-content {
+  background-color: var(--popup-menu-bg);
+  padding: 10px;
+  border-radius: 4px;
+  white-space: pre;  /* Changed from pre-wrap to preserve formatting */
+  overflow-x: auto;  /* Enable horizontal scrolling */
+  min-width: 100%;   /* Ensure content doesn't shrink below container width */
+}
+
+/* JSON syntax highlighting colors */
+.json-content .json-key {
+  color: #f92672; /* Pink for keys */
+}
+
+.json-content .json-string {
+  color: #a6e22e; /* Green for strings */
+}
+
+.json-content .json-number {
+  color: #66d9ef; /* Blue for numbers */
+}
+
+.json-content .json-boolean {
+  color: #fd971f; /* Orange for booleans */
+}
+
+.json-content .json-null {
+  color: #ae81ff; /* Purple for null */
+}
+
+.file-mention .error {
+  color: #ff6b6b;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--text-color-main);
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.markdown-content {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  background: var(--popup-menu-bg);
+  border-radius: 8px;
+  padding: 18px 24px;
+  color: var(--text-color-main);
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 700;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.markdown-content code {
+  background: #23272e;
+  color: #e7c06f;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.markdown-content pre {
+  background: #23272e;
+  color: #e7c06f;
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 1em;
+}
+
+.file-explorer-container.expanded {
+  width: 100vw !important;
+  right: 0;
+  /* increase font boldness not wight  */
+  .file-mention{
+    .markdown-content{
+      
+      color: #9a9b9a;
+      font-weight: 900;
+    }
+    
+  }  
+}
+
+/* Add these table styles to your existing CSS */
+
+.markdown-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.9em;
+}
+
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid var(--hr-color);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.markdown-content th {
+  background-color: var(--button-background-color);
+  font-weight: 600;
+}
+
+.markdown-content tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.markdown-content tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure tables are responsive */
+.markdown-content {
+  overflow-x: auto;
+}
+
+.markdown-content table {
+  min-width: 100%;
+  white-space: nowrap;
+}
+
