@@ -22,7 +22,7 @@ const Home = () => {
       console.log('session changed');
       console.log(session);
       localStorage.setItem('username', session?.user?.user_metadata?.full_name);
-      console.log("session:")
+      console.log("full_name:")
       console.log(session?.user?.user_metadata?.full_name)
     });
 
@@ -55,7 +55,7 @@ const Home = () => {
             },
           }}
           providers={['google']}
-          redirectTo={`${window.location.origin}/start-chat`}
+          redirectTo={`${window.location.origin}`}
 
         />
 
